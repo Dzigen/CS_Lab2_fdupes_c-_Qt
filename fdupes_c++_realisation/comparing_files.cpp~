@@ -1,0 +1,82 @@
+#include <map>
+#include <list>
+#include <string>
+#include<fstream>
+#include<iostream>
+
+#include<cstdlib>
+#include<cstdio>
+
+#include "dir_iterator_size_hash_insert.h"
+
+using namespace std;
+
+void comparing_files(map < int, map < int,
+                     list < string > > >*data_base_files, map < int,
+                     list < string > >*duplicats)
+{
+
+    int size;
+
+    char chr_f;
+    char chr_s;
+
+    for (map < int, map < int, list < string > > >::iterator it =
+         data_base_files->begin(); it != data_base_files->end(); it++)
+        for (map < int, list < string > >::iterator ut =
+             it->second.begin(); ut != it->second.end(); ut++)
+            for (list < string >::iterator ptr_f = ut->second.begin();
+                 ptr_f != ut->second.end(); ptr_f++) {
+
+                list < string >::iterator ptr_s = ptr_f;
+                ptr_s++;
+
+                for (ptr_s; ptr_s != ut->second.end(); ptr_s++) {
+
+                    size = 0;
+
+                    /*открываем файл */
+                    ifstream file_f;
+                    file_f.open(ptr_f->c_str());
+
+                    /*проверка на наличие ошибок при открытии файла */
+                    if (!file_f.is_open()) {
+                        fprintf(stderr, "error with open file: %s \n",
+                                ptr_f->c_str());
+                        exit(EXIT_FAILURE);
+                    }
+
+
+                    /*открываем файл */
+                    ifstream file_s;
+                    file_s.open(ptr_s->c_str());
+
+                    /*проверка на наличие ошибок при открытии файла */
+                    if (!file_s.is_open()) {
+                        fprintf(stderr, "error with open file: %s \n",
+                                ptr_s->c_str());
+                        exit(EXIT_FAILURE);
+                    }
+
+
+                    /*сравниваем файлы посимвольно */
+                    while (file_f.get(chr_f) && file_s.get(chr_s)) {
+
+                        if (chr_f == chr_s) {
+                            size += 1;
+                            continue;
+                        }
+
+                        break;
+                    }
+
+                    file_s.close();
+                    file_f.close();
+
+                    if (size == it->first)
+                        insert_in_duplicats(duplicats, *ptr_f, *ptr_s);
+                }
+            }
+
+
+}
