@@ -1,3 +1,8 @@
+/**
+ *insert_in_data.cpp - Реализация функции insert_in_data.Описание функции находится в dir_iterator_size_hash_insert.h.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include <map>
 #include <list>
 #include <string>

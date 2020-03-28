@@ -1,3 +1,8 @@
+/**
+ *dir_iterator.cpp - Реализация функции dir_iterator.Описание функции находится в dir_iterator_size_hash_insert.h.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include <QMap>
 #include <QList>
 #include <QString>

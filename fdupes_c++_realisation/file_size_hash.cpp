@@ -1,3 +1,8 @@
+/**
+ *file_size_hash.cpp - Реализация функции file_size_hash.Описание функции находится в dir_iterator_size_hash_insert.h.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include <fstream>
 #include <string>
 #include <cstdlib>

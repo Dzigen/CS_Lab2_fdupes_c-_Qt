@@ -1,3 +1,8 @@
+/**
+ *fdupes_realisation_main.cpp - main файл программы ,реализующей упрощенные функции утилиты fdupes.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include <QTextStream>
 #include <QMap>
 #include <QList>

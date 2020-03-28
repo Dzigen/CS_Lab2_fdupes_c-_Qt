@@ -1,3 +1,8 @@
+/**
+ *comparing_files.cpp - Реализация функции comparing_files.Описание функции находится в dir_iterator_size_hash_insert.h.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include <QMap>
 #include <QList>
 #include <QString>
@@ -16,9 +21,9 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
 	/*переменная для хранения количества совпавших подряд символов у сравниваемых файлов*/
     long size;
 
-    /*переменные для хранения байт,получаемых из данных файлов*/
-    char chr_f;
-    char chr_s;
+    /*переменные для хранения строк,получаемых из данных файлов*/
+    QString str_f;
+    QString str_s;
 
 	/*спускаем к структурам(list<string>),хранящим пути файлов c одинаковым размером(в байтах) м хэшем*/
     for(QMap<long,QMap<long,QList<QString> > >::iterator it=data_base_files->begin(); it!=data_base_files->end();it++)
@@ -39,7 +44,7 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
                     QFile file_f(*ptr_f);
 					/*проверка на наличие ошибок при открытии файла*/
                     if(!file_f.open(QIODevice::ReadOnly)){
-                        out<<"can not open file "<<*ptr_f<<": "<<file_f.errorString()<<endl;
+                        out<<"can not open file: "<<*ptr_f<<endl;
                         _Exit(EXIT_FAILURE);
                     }
 
@@ -47,7 +52,7 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
                     QFile file_s(*ptr_s);
 					/*проверка на наличие ошибок при открытии файла*/
                     if(!file_s.open(QIODevice::ReadOnly)){
-                        out<<"can not open file "<<*ptr_s<<": "<<file_s.errorString()<<endl;
+                        out<<"can not open file: "<<*ptr_s<<endl;
                         _Exit(EXIT_FAILURE);
                     }
 
@@ -55,35 +60,18 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
                     /*сравниваем файлы построчно*/
                     while(!file_f.atEnd() && !file_s.atEnd()){
 
-
                         /*записываем строки,полученные из файлов*/
-                        file_f.getChar(&chr_f);
-                        file_s.getChar(&chr_s);
-
-                        /*проверка на наличие ошибок при чтении из файлов*/
-                        if(file_f.error()){
-                            out<<"error with reading  "<<*ptr_f<<": "<<file_f.errorString()<<endl;
-                            file_f.close();
-                            if( file_s.error()){
-                                out<<"error with reading  "<<*ptr_s<<": "<<file_s.errorString()<<endl;
-                                file_s.close();
-                            }
-                            _Exit(EXIT_FAILURE);
-                        }else if( file_s.error()){
-                            out<<"error with reading  "<<*ptr_s<<": "<<file_s.errorString()<<endl;
-                            file_s.close();
-                            _Exit(EXIT_FAILURE);
-                        }
-
-
+                        str_f=file_f.readLine();
+                        str_s=file_s.readLine();
 
                         /*проверка на их равенство и запись количества совпавших символов*/
-                        if(chr_f==chr_s){
-                            size++;
-                            continue;
-                        }
-                        break;
-                    }
+                        if(str_f==str_s){
+                            size+=str_f.size();
+							continue;
+						}
+
+						break;
+					}
 
 					file_s.close();
 					file_f.close();

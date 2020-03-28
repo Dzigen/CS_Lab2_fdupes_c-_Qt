@@ -1,3 +1,8 @@
+/**
+ *comparing_files.cpp - Реализация функции comparing_files.Описание функции находится в dir_iterator_size_hash_insert.h.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include <map>
 #include <list>
 #include <string>

@@ -1,3 +1,8 @@
+/**
+ *user_interface.cpp - Реализация функции user_interface.Описание функции находится в dir_iterator_size_hash_insert.h.
+ *
+ * Copyright (c) 2020, Menshikov Mikhail 
+ */
 #include<map>
 #include<list>
 #include<string>
