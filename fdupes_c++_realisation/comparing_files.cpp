@@ -1,8 +1,10 @@
 #include <map>
 #include <list>
 #include <string>
-#include<fstream>
-#include<iostream>
+#include <fstream>
+#include <iostream>      
+#include <cstring>                     
+#include <cerrno>
 
 #include<cstdlib>
 #include<cstdio>
@@ -41,7 +43,7 @@ void comparing_files(map< int,map< int,list<string> > > *data_base_files,map< in
 					/*проверка на наличие ошибок при открытии файла*/
 					if(!file_f.is_open())
 					{
-						fprintf(stderr, "error with open file: %s \n", ptr_f->c_str());
+						fprintf(stderr, "error with open file %s: %s \n", ptr_f->c_str(),strerror(errno));
         					exit(EXIT_FAILURE);
 					}			
 
@@ -52,19 +54,27 @@ void comparing_files(map< int,map< int,list<string> > > *data_base_files,map< in
 					/*проверка на наличие ошибок при открытии файла*/
 					if(!file_s.is_open())
 					{
-						fprintf(stderr, "error with open file: %s \n", ptr_s->c_str());
+						fprintf(stderr, "error with open file %s: %s \n", ptr_s->c_str(),strerror(errno));
         					exit(EXIT_FAILURE);
 					}		
 					
 
 					/*сравниваем файлы посимвольно*/
-					while(file_f.get(chr_f) && file_s.get(chr_s)){
+					while(file_f.get(chr_f) && file_s.get(chr_s) && file_s.good() && file_s.good()){
+						
 						if(chr_f==chr_s){
 							size+=1;
 							continue;
 						}
 
 						break;
+					}
+						
+					if( !file_s.good() || !file_s.good()){
+						fprintf(stderr, "some of the files  %s  %s is corrupted : %s \n", ptr_f->c_str(),ptr_s->c_str(),strerror(errno));
+						file_s.close();
+						file_f.close();
+        					exit(EXIT_FAILURE);
 					}
 
 					file_s.close();

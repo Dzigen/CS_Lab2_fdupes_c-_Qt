@@ -38,16 +38,6 @@ int main(int argc, char *argv[])
      */
     dir_iterator(argv[1], &data_base_files);
 
-    for (QMap < long, QMap < long, QList < QString > > >::iterator it =data_base_files.begin(); it != data_base_files.end(); it++) {
-           out << it.key() << endl;
-           for (QMap < long, QList < QString > >::iterator ut =it.value().begin(); ut != it.value().end(); ut++){
-               out << "  " << ut.key() << endl;
-               for (QList < QString >::iterator ptr = ut.value().begin(); ptr != ut.value().end(); ptr++)
-                   out << "    " << *ptr << endl;
-               }
-           }
-
-
     /**
      *	Посимвольно сравниваем файлы, отсортированные по размеру и хэшу
      */

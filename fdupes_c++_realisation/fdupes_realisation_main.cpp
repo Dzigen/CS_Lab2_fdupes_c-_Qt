@@ -13,7 +13,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	/*Проверка на указание директории */
-	if (argc < 2)
+	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s directory\n", argv[0]);
 		exit(EXIT_FAILURE);

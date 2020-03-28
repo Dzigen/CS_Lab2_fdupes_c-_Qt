@@ -16,6 +16,12 @@ void dir_iterator(string name, map < int, map < int,list < string > > >*data_bas
 	/*переменная для хранения хэша найденного  файла*/
 	long hash;
 
+	/*проверка на существование введённой директории*/
+	if(!fs::exists(name)){
+		fprintf(stderr,"directore  %s  is not exist\n",name.c_str());
+		exit(EXIT_FAILURE);
+	}
+
 	/*Выполняем рекурсивный обход дерева каталогов*/
 	for (auto & p:fs::recursive_directory_iterator(name))
         	if (fs::is_regular_file(fs::status(p))) {

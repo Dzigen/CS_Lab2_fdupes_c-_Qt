@@ -11,15 +11,15 @@ void file_size_hash(QString name, long *size, long *hash)
     /*инициализация потока вывода данных в консоль*/
     QTextStream out(stdout);
 
-    /*переменная для хранения считанной строки из файла */
-    QString s;
+    /*переменные для хранения счтанного символа из файла */
+    char c;
 
 
     /*инициализируем файл*/
     QFile file(name);
     /*проверка на наличие ошибок при открытии файла*/
     if(!file.open(QIODevice::ReadOnly)){
-        out<<"can not open file: "<<name<<endl;
+        out<<"can not open file "<<name<<": "<<file.errorString()<<endl;
         _Exit(EXIT_FAILURE);
     }
 
@@ -28,13 +28,15 @@ void file_size_hash(QString name, long *size, long *hash)
     /*вычисляем размер(в байтах) и хэш файла */
     while (!file.atEnd()) {
 
-        /*суммируем размер строки(в юайтах), считанной из файла*/
-        s=file.readLine();
-        (*size) += s.size();
+        file.getChar(&c);
+        if( file.error()){
+            out<<"error with reading  "<<name<<": "<<file.errorString()<<endl;
+            file.close();
+            _Exit(EXIT_FAILURE);
+        }
 
-        /*суммирум коды символов, записанных в считанной строке из файла*/
-        for(  int i=0; i<s.size(); i++)
-             (*hash) += s[i].unicode();
+        (*size) += 1;
+        (*hash) +=c;
 
     }
 

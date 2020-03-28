@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.5.1, 2020-03-26T07:21:13. -->
+<!-- Written by QtCreator 3.5.1, 2020-03-28T04:24:26. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -239,9 +239,9 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">fdupesQt</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/arkadiy/lab_work/CS/task9/fdupes_c++_with_Qt_realisation/fdupesQt/fdupesQt.pro</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">/home/arkadiy/lab_work/CS/task9/fdupes_c++_with_Qt_realisation/dir_0</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">fdupesQt2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/arkadiy/lab_work/CS/Меньщиков_Михаил_группа_22107_ИМИТ_ПетрГУ/fdupes_c++_with_Qt_realisation/fdupesQt/fdupesQt.pro</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">/home/arkadiy/dir_0</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">fdupesQt.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseTerminal">true</value>
