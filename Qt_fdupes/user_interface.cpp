@@ -63,7 +63,7 @@ void user_interface(QMap < long, QList < QString > >*duplicats)
         }
 
         num_pos = 0;
-
+        bool flag;
         /*Выполнение команды.Вывод информации об исполненной команде*/
         for (QList < QString >::iterator uti = iti.value().begin(); uti != iti.value().end(); uti++) {
 
@@ -80,7 +80,13 @@ void user_interface(QMap < long, QList < QString > >*duplicats)
                     continue;
                 }
 
-                QFile::remove(*uti);
+                flag=QFile::remove(*uti);
+
+                if(!flag){
+                   out << "[+]" << ": " << *uti << "\t <-cannot remove this file"<<endl;
+                   continue;
+                }
+
                 out << "[-]" << ": " << *uti << endl;
 
             }
