@@ -91,9 +91,9 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
 					file_s.close();
 					file_f.close();
 					
-					/*если файлы посимвольно совпадают,вносим в базу данных дубликатов*/
-                    if(size==it.key())
-						insert_in_duplicats(duplicats,*ptr_f,*ptr_s);
+			/*если файлы посимвольно совпадают,вносим в базу данных дубликатов*/
+                   	 if(size==it.key())
+				insert_in_duplicats(duplicats,*ptr_f,*ptr_s);
 				}
 			}	
 }

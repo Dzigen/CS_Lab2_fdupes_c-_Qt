@@ -66,11 +66,13 @@ void comparing_files(map< int,map< int,list<string> > > *data_base_files,map< in
 
 					/*сравниваем файлы посимвольно*/
 					bool flag =true;
-					while(flag){
+					while(flag)
+					{
 						file_f.get(chr_f);
 						file_s.get(chr_s);
-						
-						if(file_s.good() &&file_s.good()){
+
+						/*проверка на корректное считывание*/
+						if(file_f.good()||file_s.good()){
 							if(chr_f==chr_s){
 								size+=1;
 								continue;
@@ -78,12 +80,19 @@ void comparing_files(map< int,map< int,list<string> > > *data_base_files,map< in
 							break;
 						}else if(file_f.eof()||file_s.eof()){
 							flag=false;
-						}else if( file_s.fail() || !file_s.fail()){
-							fprintf(stderr, "some of the files  %s  %s is corrupted : %s \n", ptr_f->c_str(),ptr_s->c_str(),strerror(errno));
+							continue;					
+						}else if( file_f.fail() ){
+							fprintf(stderr, " file  %s  is corrupted : %s \n", ptr_f->c_str(),strerror(errno));
+							file_s.close();
+							file_f.close();
+        						exit(EXIT_FAILURE);
+						}else if( file_f.fail() ){
+							fprintf(stderr, " file  %s  is corrupted : %s \n", ptr_f->c_str(),strerror(errno));
 							file_s.close();
 							file_f.close();
         						exit(EXIT_FAILURE);
 						}
+
 					}
 						
 
