@@ -18,12 +18,12 @@ void insert_in_duplicats(QMap< long,QList<QString> >* duplicats,QString ptr_f,QS
 	bool flag_s=false;
 
 	/*дополгительная структура для дальнейшего добавления в  duplicats*/
-    QList<QString> listing;
+        QList<QString> listing;
 	
 	/*номер нового раздела*/
 	int number;
 
-	/*обходим  структуру дубликатов и проверяем на вхождение данные пути файлов*/
+    /*обходим  структуру дубликатов и проверяем на вхождение данные пути файлов*/
     for(QMap<long,QList<QString> >::iterator it=duplicats->begin(); it!=duplicats->end();it++){
         for(QList<QString>::iterator ut=it.value().begin(); ut!=it.value().end();ut++){
 					
@@ -36,9 +36,9 @@ void insert_in_duplicats(QMap< long,QList<QString> >* duplicats,QString ptr_f,QS
 		
 		/*если какой-то путь из пары уже в структуре,то в его раздел  добавляется другой путь пары*/
 		if(flag_f==true &&  flag_s==false)
-            it.value().push_back(ptr_s);
+            		it.value().push_back(ptr_s);
 		else if(flag_f==false &&  flag_s==true)
-            it.value().push_back(ptr_f);
+            		it.value().push_back(ptr_f);
 	}
 	/*если пара путей файлов не входит в структуру,то создаём новый раздел и добавляем в него эту пару */
 	if(flag_f==false &&  flag_s==false){
