@@ -31,19 +31,24 @@ void file_size_hash(string name, long *size, long *hash)
 	}
 
 	/*вычисляем размер(в байтах) и хэш файла */
-	
-	while (file.get(c) && file.good())
+	bool flag=true;
+	while (flag)
 	{
-		(*size) += 1;
-		/*суммирум коды символов, записанные в файле*/
-		(*hash) += c;
+		file.get(c);
+		if(file.good()){	
+			(*size) += 1;
+			/*суммирум коды символов, записанные в файле*/
+			(*hash) += c;
+		}else if(file.eof()){
+			flag=false;
+			continue;
+		}else if(file.fail()){
+			fprintf(stderr, "file %s is corrupted : %s \n", name.c_str(),strerror(errno));
+			file.close();
+        		exit(EXIT_FAILURE);
+		}
     	}
 
-	if(!file.good()){
-		fprintf(stderr, "file %s is corrupted : %s \n", name.c_str(),strerror(errno));
-		file.close();
-        	exit(EXIT_FAILURE);
-	}
 
 	file.close();
 }

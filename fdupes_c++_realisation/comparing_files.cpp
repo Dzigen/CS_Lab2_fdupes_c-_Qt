@@ -65,22 +65,27 @@ void comparing_files(map< int,map< int,list<string> > > *data_base_files,map< in
 					
 
 					/*сравниваем файлы посимвольно*/
-					while(file_f.get(chr_f) && file_s.get(chr_s) && file_s.good() && file_s.good()){
+					bool flag =true;
+					while(flag){
+						file_f.get(chr_f);
+						file_s.get(chr_s);
 						
-						if(chr_f==chr_s){
-							size+=1;
-							continue;
+						if(file_s.good() &&file_s.good()){
+							if(chr_f==chr_s){
+								size+=1;
+								continue;
+							}
+							break;
+						}else if(file_f.eof()||file_s.eof()){
+							flag=false;
+						}else if( file_s.fail() || !file_s.fail()){
+							fprintf(stderr, "some of the files  %s  %s is corrupted : %s \n", ptr_f->c_str(),ptr_s->c_str(),strerror(errno));
+							file_s.close();
+							file_f.close();
+        						exit(EXIT_FAILURE);
 						}
-
-						break;
 					}
 						
-					if( !file_s.good() || !file_s.good()){
-						fprintf(stderr, "some of the files  %s  %s is corrupted : %s \n", ptr_f->c_str(),ptr_s->c_str(),strerror(errno));
-						file_s.close();
-						file_f.close();
-        					exit(EXIT_FAILURE);
-					}
 
 					file_s.close();
 					file_f.close();
