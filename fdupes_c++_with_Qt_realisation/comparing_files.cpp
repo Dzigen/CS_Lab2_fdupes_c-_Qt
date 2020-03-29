@@ -21,9 +21,9 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
 	/*переменная для хранения количества совпавших подряд символов у сравниваемых файлов*/
     long size;
 
-    /*переменные для хранения строк,получаемых из данных файлов*/
-    QString str_f;
-    QString str_s;
+    /*переменные для хранения символов,получаемых из данных файлов*/
+    char chr_f;
+    char chr_s;
 
 	/*спускаем к структурам(list<string>),хранящим пути файлов c одинаковым размером(в байтах) м хэшем*/
     for(QMap<long,QMap<long,QList<QString> > >::iterator it=data_base_files->begin(); it!=data_base_files->end();it++)
@@ -57,16 +57,31 @@ void comparing_files(QMap< long,QMap< long,QList<QString> > > *data_base_files,Q
                     }
 
 
-                    /*сравниваем файлы построчно*/
+                    /*сравниваем файлы посимвольно*/
                     while(!file_f.atEnd() && !file_s.atEnd()){
 
-                        /*записываем строки,полученные из файлов*/
-                        str_f=file_f.readLine();
-                        str_s=file_s.readLine();
+                        /*записываем символы,полученные из файлов*/
+                        file_f.getChar(&chr_f);
+
+                        if( file_f.error()){
+                            out<<"error with reading  "<<*ptr_f<<": "<<file_f.errorString()<<endl;
+                            file_f.close();
+                            file_s.close();
+                            _Exit(EXIT_FAILURE);
+                        }
+
+                        file_s.getChar(&chr_s);
+
+                        if( file_s.error()){
+                            out<<"error with reading  "<<*ptr_s<<": "<<file_s.errorString()<<endl;
+                            file_f.close();
+                            file_s.close();
+                            _Exit(EXIT_FAILURE);
+                        }
 
                         /*проверка на их равенство и запись количества совпавших символов*/
-                        if(str_f==str_s){
-                            size+=str_f.size();
+                        if(chr_f==chr_s){
+                            size++;
 							continue;
 						}
 
