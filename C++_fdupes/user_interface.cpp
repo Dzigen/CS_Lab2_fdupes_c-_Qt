@@ -78,7 +78,7 @@ void user_interface(map < int, list < string > >*duplicats)
                			fs::remove(*uti);
 				}
 				catch(const fs::filesystem_error& e){
-					cout << "[+]" << ": " << *uti << "\t -"<<"cannot remove this file"<<endl;
+					cout << "[+]" << ": " << *uti << "\t <-cannot remove this file"<<endl;
 					continue;
 				}
                 		cout << "[-]" << ": " << *uti << endl;
